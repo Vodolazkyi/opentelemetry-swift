@@ -44,7 +44,7 @@ public class StableOtlpHTTPExporterBase {
             request.httpMethod = "POST"
             request.httpBody = try body.serializedData()
             request.setValue(Headers.getUserAgentHeader(), forHTTPHeaderField: Constants.HTTP.userAgent)
-            request.setValue("application/x-protobuf", forHTTPHeaderField: "Content-Type")
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         } catch {
             print("Error serializing body: \(error)")
         }
