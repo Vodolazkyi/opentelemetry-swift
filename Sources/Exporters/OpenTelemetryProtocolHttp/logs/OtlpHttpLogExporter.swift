@@ -11,7 +11,7 @@ public func defaultOltpHttpLoggingEndpoint() -> URL {
     URL(string: "http://localhost:4318/v1/logs")!
 }
 
-public class OtlpHttpLogExporter: OtlpHttpExporterBase, LogRecordExporter {
+public class OtlpHttpLogExporter: StableOtlpHTTPExporterBase, LogRecordExporter {
     var pendingLogRecords: [ReadableLogRecord] = []
     private let exporterLock = Lock()
     override public init(endpoint: URL = defaultOltpHttpLoggingEndpoint(),
