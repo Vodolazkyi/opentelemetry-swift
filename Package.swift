@@ -6,17 +6,12 @@ import PackageDescription
 let package = Package(
     name: "opentelemetry-swift",
     platforms: [
-        .macOS(.v10_15),
-        .iOS(.v13),
-        .tvOS(.v13),
-        .watchOS(.v5)
+        .iOS(.v13)
     ],
     products: [
         .library(name: "OpenTelemetryApi", type: .static, targets: ["OpenTelemetryApi"]),
         .library(name: "OpenTelemetrySdk", type: .static, targets: ["OpenTelemetrySdk"]),
         .library(name: "ResourceExtension", type: .static, targets: ["ResourceExtension"]),
-        .library(name: "OpenTracingShim-experimental", type: .static, targets: ["OpenTracingShim"]),
-        .library(name: "SwiftMetricsShim", type: .static, targets: ["SwiftMetricsShim"]),
         .library(name: "StdoutExporter", type: .static, targets: ["StdoutExporter"]),
         .library(name: "OpenTelemetryProtocolExporter", type: .static, targets: ["OpenTelemetryProtocolExporterGrpc"]),
         .library(name: "OpenTelemetryProtocolExporterHTTP", type: .static, targets: ["OpenTelemetryProtocolExporterHttp"]),
@@ -24,7 +19,6 @@ let package = Package(
         .library(name: "InMemoryExporter", type: .static, targets: ["InMemoryExporter"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/undefinedlabs/opentracing-objc", from: "0.5.2"),
         .package(url: "https://github.com/grpc/grpc-swift.git", from: "1.0.0"),
         .package(url: "https://github.com/apple/swift-protobuf.git", from: "1.20.2"),
         .package(url: "https://github.com/apple/swift-log.git", from: "1.4.4"),
@@ -38,18 +32,6 @@ let package = Package(
         .target(name: "ResourceExtension",
                 dependencies: ["OpenTelemetrySdk"],
                 path: "Sources/Instrumentation/SDKResourceExtension",
-                exclude: ["README.md"]),
-        .target(name: "OpenTracingShim",
-                dependencies: [
-                    "OpenTelemetrySdk",
-                    .product(name: "Opentracing", package: "opentracing-objc")
-                ],
-                path: "Sources/Importers/OpenTracingShim",
-                exclude: ["README.md"]),
-        .target(name: "SwiftMetricsShim",
-                dependencies: ["OpenTelemetrySdk",
-                               .product(name: "CoreMetrics", package: "swift-metrics")],
-                path: "Sources/Importers/SwiftMetricsShim",
                 exclude: ["README.md"]),
         .target(name: "OpenTelemetryProtocolExporterCommon",
                 dependencies: ["OpenTelemetrySdk",
