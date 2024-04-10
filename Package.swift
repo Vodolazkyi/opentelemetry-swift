@@ -19,7 +19,6 @@ let package = Package(
         .library(name: "SignPostIntegration", type: .static, targets: ["SignPostIntegration"]),
         .library(name: "OpenTracingShim-experimental", type: .static, targets: ["OpenTracingShim"]),
         .library(name: "SwiftMetricsShim", type: .static, targets: ["SwiftMetricsShim"]),
-        .library(name: "JaegerExporter", type: .static, targets: ["JaegerExporter"]),
         .library(name: "ZipkinExporter", type: .static, targets: ["ZipkinExporter"]),
         .library(name: "StdoutExporter", type: .static, targets: ["StdoutExporter"]),
         .library(name: "PrometheusExporter", type: .static, targets: ["PrometheusExporter"]),
@@ -32,7 +31,6 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/undefinedlabs/opentracing-objc", from: "0.5.2"),
-        .package(url: "https://github.com/undefinedlabs/Thrift-Swift", from: "1.1.1"),
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.0.0"),
         .package(url: "https://github.com/grpc/grpc-swift.git", from: "1.0.0"),
         .package(url: "https://github.com/apple/swift-protobuf.git", from: "1.20.2"),
@@ -74,12 +72,6 @@ let package = Package(
                                .product(name: "CoreMetrics", package: "swift-metrics")],
                 path: "Sources/Importers/SwiftMetricsShim",
                 exclude: ["README.md"]),
-        .target(name: "JaegerExporter",
-                dependencies: [
-                    "OpenTelemetrySdk",
-                    .product(name: "Thrift", package: "Thrift-Swift", condition: .when(platforms: [.iOS, .macOS, .tvOS, .macCatalyst, .linux]))
-                ],
-                path: "Sources/Exporters/Jaeger"),
         .target(name: "ZipkinExporter",
                 dependencies: ["OpenTelemetrySdk"],
                 path: "Sources/Exporters/Zipkin"),
