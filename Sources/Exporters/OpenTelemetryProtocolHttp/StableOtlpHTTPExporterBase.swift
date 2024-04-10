@@ -42,7 +42,7 @@ public class StableOtlpHTTPExporterBase {
 
         do {
             request.httpMethod = "POST"
-            request.httpBody = try body.serializedData()
+            request.httpBody = try body.jsonUTF8Data()
             request.setValue(Headers.getUserAgentHeader(), forHTTPHeaderField: Constants.HTTP.userAgent)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         } catch {
