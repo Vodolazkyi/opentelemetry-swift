@@ -29,10 +29,6 @@ let package = Package(
         .library(name: "InMemoryExporter", type: .static, targets: ["InMemoryExporter"]),
         .library(name: "DatadogExporter", type: .static, targets: ["DatadogExporter"]),
         .library(name: "NetworkStatus", type: .static, targets: ["NetworkStatus"]),
-        .executable(name: "simpleExporter", targets: ["SimpleExporter"]),
-        .executable(name: "OTLPExporter", targets: ["OTLPExporter"]),
-        .executable(name: "OTLPHTTPExporter", targets: ["OTLPHTTPExporter"]),
-        .executable(name: "loggingTracer", targets: ["LoggingTracer"])
     ],
     dependencies: [
         .package(url: "https://github.com/undefinedlabs/opentracing-objc", from: "0.5.2"),
@@ -176,51 +172,6 @@ let package = Package(
                     path: "Tests/ExportersTests/DatadogExporter"),
         .testTarget(name: "PersistenceExporterTests",
                     dependencies: ["PersistenceExporter"],
-                    path: "Tests/ExportersTests/PersistenceExporter"),
-        .executableTarget(
-            name: "LoggingTracer",
-            dependencies: ["OpenTelemetryApi"],
-            path: "Examples/Logging Tracer"
-        ),
-        .executableTarget(
-            name: "SimpleExporter",
-            dependencies: ["OpenTelemetrySdk", "JaegerExporter", "StdoutExporter", "ZipkinExporter", "ResourceExtension", "SignPostIntegration"],
-            path: "Examples/Simple Exporter",
-            exclude: ["README.md"]
-        ),
-        .executableTarget(
-            name: "OTLPExporter",
-            dependencies: ["OpenTelemetrySdk", "OpenTelemetryProtocolExporterGrpc", "StdoutExporter", "ZipkinExporter", "ResourceExtension", "SignPostIntegration"],
-            path: "Examples/OTLP Exporter",
-            exclude: ["README.md"]
-        ),
-        .executableTarget(
-            name: "OTLPHTTPExporter",
-            dependencies: ["OpenTelemetrySdk", "OpenTelemetryProtocolExporterHttp", "StdoutExporter", "ZipkinExporter", "ResourceExtension", "SignPostIntegration"],
-            path: "Examples/OTLP HTTP Exporter",
-            exclude: ["README.md"]
-        ),
-        .executableTarget(
-            name: "PrometheusSample",
-            dependencies: ["OpenTelemetrySdk", "PrometheusExporter"],
-            path: "Examples/Prometheus Sample",
-            exclude: ["README.md"]
-        ),
-        .executableTarget(
-            name: "DatadogSample",
-            dependencies: ["DatadogExporter"],
-            path: "Examples/Datadog Sample",
-            exclude: ["README.md"]
-        ),
-        .executableTarget(
-          name: "LogsSample",
-          dependencies: ["OpenTelemetrySdk", "OpenTelemetryProtocolExporterGrpc", .product(name: "GRPC", package: "grpc-swift")],
-          path: "Examples/Logs Sample"),
-        .executableTarget(
-            name: "NetworkSample",
-            dependencies: ["URLSessionInstrumentation", "StdoutExporter"],
-            path: "Examples/Network Sample",
-            exclude: ["README.md"]
-        )
+                    path: "Tests/ExportersTests/PersistenceExporter")
     ]
 )
