@@ -55,12 +55,12 @@ Metrics is implemented using an outdated spec, is fully functional but will chan
 
 #### Traces
 
-* Exporters: Stdout, Zipkin, Datadog and OpenTelemetry (OTLP) collector
+* Exporters: Stdout, Zipkin and OpenTelemetry (OTLP) collector
 * Importers: OpenTracingShim
 
 #### Metrics
 
-* Exporters: Prometheus, Datadog, and OpenTelemetry (OTLP) collector
+* Exporters: Prometheus, and OpenTelemetry (OTLP) collector
 * Importers: SwiftMetricsShim
 
 #### Logs
