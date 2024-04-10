@@ -71,10 +71,7 @@ Metrics is implemented using an outdated spec, is fully functional but will chan
 
 ### Instrumentation libraries
 
-* `URLSession`
-* `NetworkStatus`
 * `SDKResourceExtension`
-* `SignPostIntegration`
 
 ## Contributing
 
