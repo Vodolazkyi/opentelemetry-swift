@@ -648,16 +648,19 @@ extension Opentelemetry_Proto_Trace_V1_Span: SwiftProtobuf.Message, SwiftProtobu
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
     if !self.traceID.isEmpty {
-      try visitor.visitSingularBytesField(value: self.traceID, fieldNumber: 1)
+      let hexTraceId = self.traceID.map { String(format: "%02hhx", $0) }.joined()
+      try visitor.visitSingularStringField(value: hexTraceId, fieldNumber: 1)
     }
     if !self.spanID.isEmpty {
-      try visitor.visitSingularBytesField(value: self.spanID, fieldNumber: 2)
+      let hexSpanId = self.spanID.map { String(format: "%02hhx", $0) }.joined()
+      try visitor.visitSingularStringField(value: hexSpanId, fieldNumber: 2)
     }
     if !self.traceState.isEmpty {
       try visitor.visitSingularStringField(value: self.traceState, fieldNumber: 3)
     }
     if !self.parentSpanID.isEmpty {
-      try visitor.visitSingularBytesField(value: self.parentSpanID, fieldNumber: 4)
+      let hexParentSpanId = self.parentSpanID.map { String(format: "%02hhx", $0) }.joined()
+      try visitor.visitSingularStringField(value: hexParentSpanId, fieldNumber: 4)
     }
     if !self.name.isEmpty {
       try visitor.visitSingularStringField(value: self.name, fieldNumber: 5)
